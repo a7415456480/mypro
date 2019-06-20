@@ -2,10 +2,10 @@
 import os
 import sys
 
-if __name__ == "__main__":
-    #os.environ.setdefault("DJANGO_SETTINGS_MODULE", "typeidea.settings")
-    profile = os.environ.get('TYPEIDEA_PROFILE','develog')
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE","typeidea_settings.%s" % profile)
+
+def main():
+    profile = os.environ.get('TYPEIDEA_PROFILE', 'develop')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "typeidea.settings.%s" % profile)
 
     try:
         from django.core.management import execute_from_command_line
@@ -23,3 +23,6 @@ if __name__ == "__main__":
             )
         raise
     execute_from_command_line(sys.argv)
+
+if __name__ == "__main__":
+    main()
